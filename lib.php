@@ -40,9 +40,9 @@ function report_allylti_extend_navigation_course($navigation, $course, $context)
     $url = new moodle_url('/report/allylti/view.php', ['report' => 'admin']);
     $config = get_config('report_allylti');
     $configured = !empty($config) && !empty($config->adminurl) && !empty($config->key) && !empty($config->secret);
-    $canview = has_capability('report/allylti:viewadminreport', context_system::instance());
+    $canview = $configured && has_capability('report/allylti:viewadminreport', context_system::instance());
 
-    if ($canview && $configured) {
+    if ($canview) {
         $navigation->add(new lang_string('adminreport', 'report_allylti'), $url, navigation_node::TYPE_SETTING, null,
                 null, new pix_icon('i/report', ''));
     }
