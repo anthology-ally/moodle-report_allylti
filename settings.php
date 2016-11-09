@@ -15,10 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is a one-line short description of the file.
- *
- * You can have a rather longer description of the file as well,
- * if you like, and it can span multiple lines.
+ * Settings for Ally reports.
  *
  * @package    report_allylti
  * @author     Sam Chaffee
@@ -36,4 +33,12 @@ if ($hassiteconfig) {
 
     $settings->add(new admin_setting_configpasswordunmask('report_allylti/secret',
             new lang_string('secret', 'report_allylti'), new lang_string('secretdesc', 'report_allylti'), ''));
+}
+
+$config = get_config('report_allylti');
+
+$configured = !empty($config) && !empty($config->adminurl) && !empty($config->key) && !empty($config->secret);
+if ($configured) {
+    $ADMIN->add('reports', new admin_externalpage('allyadminreport', get_string('adminreport', 'report_allylti'),
+            "$CFG->wwwroot/report/allylti/view.php?report=admin", 'report/allylti:viewadminreport'));
 }

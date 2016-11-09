@@ -25,23 +25,18 @@ Feature: Launch to Ally reports
   As an Administrator
   I want to click a link to launch to Ally reports
 
-  Scenario: Administrator does not see a link when the plugin is not configured
+  @javascript
+  Scenario: Administrator can click a link to launch report when configured
     Given I log in as "admin"
     And I am on site homepage
-    And I expand "Front page settings" node
-    And I expand "Reports" node
-    Then "Ally admin report" "link" should not exist in the "#settingsnav" "css_element"
-
-  Scenario: Administrator does see a link when the plugin is configured
-    Given I log in as "admin"
-    And I am on site homepage
-    And I navigate to "Ally reports" node in "Site administration > Plugins > Reports"
-    And I set the field "Launch URL" to "http://locallaunch.dev"
+    And I navigate to "Accessibility report" node in "Site administration > Plugins > Reports"
+    And I set the field "Launch URL" to local url "/report/allylti/tests/fixtures/report.php"
     And I set the field "Key" to "ltikey"
     And I set the field "Secret" to "secretpassword12345"
     And I press "Save changes"
-    And I am on site homepage
-    Then "Ally admin report" "link" should exist in the "#settingsnav" "css_element"
+    And I navigate to "Accessibility" node in "Site administration > Reports"
+    And I switch to "contentframe" iframe
+    Then I should see "This represents a report launch"
 
   Scenario: Teacher does not see a link for the report
     Given the following "users" exist:
@@ -57,5 +52,5 @@ Feature: Launch to Ally reports
     And I follow "Course 1"
     And I expand "Course administration" node
     And I expand "Reports" node
-    Then "Ally admin report" "link" should not exist in the "#settingsnav" "css_element"
+    Then "Accessibility" "link" should not exist in the "#settingsnav" "css_element"
 

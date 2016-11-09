@@ -15,23 +15,21 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language file for Ally reports.
+ * Fixture file for behat tests.
  *
  * @package    report_allylti
  * @author     Sam Chaffee
  * @copyright  Copyright (c) 2016 Blackboard Inc. (http://www.blackboard.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-defined('MOODLE_INTERNAL') || die();
 
-$string['pluginname'] = 'Accessibility report';
-$string['adminreport'] = 'Accessibility';
-$string['adminurl'] = 'Launch URL';
-$string['adminurldesc'] = 'The URL used to launch to the Accessibility report';
-$string['allylti:viewadminreport'] = 'View the Accessibility report';
-$string['key'] = 'Key';
-$string['keydesc'] = 'The LTI key';
-$string['notconfigured'] = 'The Ally reports are not configured';
-$string['reportnewwindow'] = 'Ally report launched in a new window';
-$string['secret'] = 'Secret';
-$string['secretdesc'] = 'The LTI secret';
+require_once(__DIR__ . '/../../../../config.php');
+?>
+<html>
+<head>
+    <title>Report launch</title>
+</head>
+<body>
+<p>This represents a report launch</p>
+</body>
+</html>

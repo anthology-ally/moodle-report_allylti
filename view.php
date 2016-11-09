@@ -26,6 +26,7 @@
 use report_allylti\local\launch_config;
 
 require_once(__DIR__ . '/../../config.php');
+require_once($CFG->libdir.'/adminlib.php');
 require_once($CFG->dirroot . '/mod/lti/locallib.php');
 
 $PAGE->set_context(context_system::instance());
@@ -36,21 +37,21 @@ $report = required_param('report', PARAM_ALPHA);
 $config = get_config('report_allylti');
 $launchconfig = new launch_config($config, $report, $CFG);
 
-$url = new moodle_url('/report/ally/view.php', ['report' => $report]);
-$PAGE->set_url($url);
-$title = get_string('pluginname', 'report_allylti');
-$PAGE->set_title($title);
 
 $launchcontainer = $launchconfig->get_launchcontainer();
 
 // Code from mod/lti/view.php with minor modifications.
 if ($launchcontainer == LTI_LAUNCH_CONTAINER_EMBED_NO_BLOCKS) {
+    $title = get_string('pluginname', 'report_allylti');
+    $url = new moodle_url('/report/ally/view.php', ['report' => $report]);
+    $PAGE->set_url($url);
+    $PAGE->set_title($title);
     $PAGE->set_pagelayout('frametop'); // Most frametops don't include footer, and pre-post blocks.
     $PAGE->blocks->show_only_fake_blocks(); // Disable blocks for layouts which do include pre-post blocks.
 } else if ($launchcontainer == LTI_LAUNCH_CONTAINER_REPLACE_MOODLE_WINDOW) {
     redirect('launch.php?report=' . $report);
 } else {
-    $PAGE->set_pagelayout('incourse');
+    admin_externalpage_setup('allyadminreport', '', null, '', array('pagelayout' => 'report'));
 }
 
 echo $OUTPUT->header();

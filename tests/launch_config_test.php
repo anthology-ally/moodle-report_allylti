@@ -83,7 +83,7 @@ class report_allylti_launch_config_testcase extends basic_testcase {
         // First test the default.
         $cfg = new stdClass();
         $launchconfig = new launch_config($config, 'admin', $cfg);
-        $this->assertEquals(LTI_LAUNCH_CONTAINER_EMBED_NO_BLOCKS, $launchconfig->get_launchcontainer());
+        $this->assertEquals(LTI_LAUNCH_CONTAINER_EMBED, $launchconfig->get_launchcontainer());
 
         // Test the override.
         $cfg->report_allylti_launch_container = LTI_LAUNCH_CONTAINER_REPLACE_MOODLE_WINDOW;

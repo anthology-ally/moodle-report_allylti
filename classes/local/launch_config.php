@@ -76,7 +76,7 @@ class launch_config {
         $this->key = $pluginconfig->key;
         $this->secret = $pluginconfig->secret;
 
-        $container = LTI_LAUNCH_CONTAINER_EMBED_NO_BLOCKS;
+        $container = LTI_LAUNCH_CONTAINER_EMBED;
         if (!empty($cfg->report_allylti_launch_container)) {
             $container = $cfg->report_allylti_launch_container;
         }
