@@ -24,6 +24,12 @@
  */
 defined('MOODLE_INTERNAL') || die();
 
+$undertest = defined('BEHAT_SITE_RUNNING') || PHPUNIT_TEST;
+if (!$undertest and is_callable('mr_off') and mr_off('report_allylti', '_MR_MISC')) {
+    $settings = null;
+    return;
+}
+
 if ($hassiteconfig) {
     $settings->add(new admin_setting_configtext('report_allylti/adminurl', new lang_string('adminurl', 'report_allylti'),
             new lang_string('adminurldesc', 'report_allylti'), '', PARAM_URL));
