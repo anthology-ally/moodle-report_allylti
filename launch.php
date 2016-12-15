@@ -32,7 +32,7 @@ require_login(null, false);
 require_capability('report/allylti:viewadminreport', context_system::instance());
 $report = required_param('report', PARAM_ALPHA);
 
-$config = get_config('report_allylti');
+$config = get_config('tool_ally');
 $launchconfig = new launch_config($config, $report, $CFG);
 $launchcontainer = $launchconfig->get_launchcontainer();
 

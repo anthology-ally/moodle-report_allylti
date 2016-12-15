@@ -29,7 +29,7 @@ Feature: Launch to Ally reports
   Scenario: Administrator can click a link to launch report when configured
     Given I log in as "admin"
     And I am on site homepage
-    And I navigate to "Accessibility report" node in "Site administration > Plugins > Reports"
+    And I navigate to "Ally" node in "Site administration > Plugins > Admin tools"
     And I set the field "Launch URL" to local url "/report/allylti/tests/fixtures/report.php"
     And I set the field "Key" to "ltikey"
     And I set the field "Secret" to "secretpassword12345"

@@ -26,13 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['pluginname'] = 'Accessibility report';
 $string['adminreport'] = 'Accessibility';
-$string['adminurl'] = 'Launch URL';
-$string['adminurldesc'] = 'The URL used to launch to the Accessibility report';
 $string['allylti:viewadminreport'] = 'View the Accessibility report';
-$string['key'] = 'Key';
-$string['keydesc'] = 'The LTI key';
 $string['notconfigured'] = 'The Accessibility report is not configured';
 $string['notenabled'] = 'The Accessibility report is not enabled';
 $string['reportnewwindow'] = 'Accessibility report launched in a new window';
-$string['secret'] = 'Secret';
-$string['secretdesc'] = 'The LTI secret';
