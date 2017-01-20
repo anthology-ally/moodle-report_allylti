@@ -50,7 +50,5 @@ Feature: Launch to Ally reports
       | teacher1 | C1 | editingteacher |
     And I log in as "teacher1"
     And I follow "Course 1"
-    And I expand "Course administration" node
-    And I expand "Reports" node
-    Then "Accessibility" "link" should not exist in the "#settingsnav" "css_element"
+    Then "Reports > Accessibility" "link" should not exist in current page administration
 
