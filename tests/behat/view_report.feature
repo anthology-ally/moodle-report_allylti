@@ -32,6 +32,7 @@ Feature: Launch to Ally reports
     And I navigate to "Ally" node in "Site administration > Plugins > Admin tools"
     And I set the field "Launch URL" to local url "/report/allylti/tests/fixtures/report.php"
     And I set the field "Key" to "ltikey"
+    And I click on "Click to enter text" "link"
     And I set the field "Secret" to "secretpassword12345"
     And I press "Save changes"
     And I navigate to "Accessibility" node in "Site administration > Reports"
