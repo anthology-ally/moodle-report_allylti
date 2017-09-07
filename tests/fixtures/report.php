@@ -23,7 +23,10 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-require_once(__DIR__ . '/../../../../config.php');
+require_once(__DIR__ . '/../../../../config.php'); // @codingStandardsIgnoreLine Ignore require login check.
+
+defined('BEHAT_SITE_RUNNING') || die();
+
 ?>
 <html>
 <head>
