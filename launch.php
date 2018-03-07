@@ -50,6 +50,7 @@ $instance = (object) [
     'password' => $launchconfig->get_secret(),
     'launchcontainer' => $launchconfig->get_launchcontainer(),
     'toolurl' => $launchconfig->get_url(),
+    'securetoolurl' => '',
     'servicesalt' => uniqid('', true),
     'debuglaunch' => 0,
 ];
