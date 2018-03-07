@@ -40,7 +40,7 @@ class report_allylti_launch_config_testcase extends basic_testcase {
     }
 
     public function test_config_empty_exception() {
-        $this->setExpectedException('\moodle_exception');
+        $this->expectException('\moodle_exception');
         new launch_config(null, 'admin', null);
     }
 
@@ -50,7 +50,7 @@ class report_allylti_launch_config_testcase extends basic_testcase {
             'key' => 'key',
         ];
         $cfg = new stdClass();
-        $this->setExpectedException('\moodle_exception');
+        $this->expectException('\moodle_exception');
         new launch_config($config, 'admin', $cfg);
     }
 
@@ -60,7 +60,7 @@ class report_allylti_launch_config_testcase extends basic_testcase {
             'secret' => 'secret',
         ];
         $cfg = new stdClass();
-        $this->setExpectedException('\moodle_exception');
+        $this->expectException('\moodle_exception');
         new launch_config($config, 'admin', $cfg);
     }
 
@@ -70,7 +70,7 @@ class report_allylti_launch_config_testcase extends basic_testcase {
             'secret' => 'secret',
         ];
         $cfg = new stdClass();
-        $this->setExpectedException('\moodle_exception');
+        $this->expectException('\moodle_exception');
         new launch_config($config, 'admin', $cfg);
     }
 
