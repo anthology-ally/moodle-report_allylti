@@ -42,7 +42,7 @@ class provider implements \core_privacy\local\metadata\provider, \core_privacy\l
     use \core_privacy\local\legacy_polyfill;
 
     public static function _get_metadata(collection $collection) {
-        $collection->link_external_location('lti', [
+        $collection->add_external_location_link('lti', [
             'userid'          => 'privacy:metadata:lti:userid',
             'useridnumber'    => 'privacy:metadata:lti:useridnumber',
             'roles'           => 'privacy:metadata:lti:roles',
