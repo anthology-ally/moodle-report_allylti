@@ -25,6 +25,8 @@
 namespace report_allylti\privacy;
 
 use core_privacy\local\metadata\collection;
+use core_privacy\local\request\approved_contextlist;
+use core_privacy\local\request\contextlist;
 
 defined('MOODLE_INTERNAL') || die();
 
@@ -35,12 +37,12 @@ defined('MOODLE_INTERNAL') || die();
  * @copyright Copyright (c) 2018 Blackboard Inc. (http://www.blackboard.com)
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements \core_privacy\local\metadata\provider {
+class provider implements \core_privacy\local\metadata\provider, \core_privacy\local\request\plugin\provider {
 
     use \core_privacy\local\legacy_polyfill;
 
     public static function _get_metadata(collection $collection) {
-        $collection->link_external_location('lti', [
+        $collection->add_external_location_link('lti', [
             'userid'          => 'privacy:metadata:lti:userid',
             'useridnumber'    => 'privacy:metadata:lti:useridnumber',
             'roles'           => 'privacy:metadata:lti:roles',
@@ -51,5 +53,18 @@ class provider implements \core_privacy\local\metadata\provider {
         ], 'privacy:metadata:lti:externalpurpose');
 
         return $collection;
+    }
+
+    public static function _get_contexts_for_userid($userid) {
+        return new contextlist();
+    }
+
+    public static function _export_user_data(approved_contextlist $contextlist) {
+    }
+
+    public static function _delete_data_for_all_users_in_context(\context $context) {
+    }
+
+    public static function _delete_data_for_user(approved_contextlist $contextlist) {
     }
 }
