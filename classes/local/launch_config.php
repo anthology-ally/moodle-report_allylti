@@ -38,22 +38,22 @@ class launch_config {
     /**
      * @var \moodle_url
      */
-    private $url;
+    protected $url;
 
     /**
      * @var string
      */
-    private $key;
+    protected $key;
 
     /** @var string
      *
      */
-    private $secret;
+    protected $secret;
 
     /**
      * @var int
      */
-    private $launchcontainer;
+    protected $launchcontainer;
 
     /**
      * launch_config constructor.
