@@ -6,7 +6,7 @@ The Ally reporting tool (report_allylti) provides a site wide accessibility repo
 
 The Ally accessibility report can be downloaded from:
  
-https://github.com/moodlerooms/moodle-report_allylti
+https://github.com/blackboard-open-source/moodle-report_allylti
 
 The reporting tool should be located and named as:
  [yourmoodledir]/report/allylti
@@ -15,7 +15,7 @@ The reporting tool should be located and named as:
 
 For the reporting tool to function it is necessary to download and configure the Ally admin tool:
 
-https://github.com/moodlerooms/moodle-tool_ally
+https://github.com/blackboard-open-source/moodle-tool_ally
 
 Instructions on how to do so are available in the README.md file for the admin tool.
 
