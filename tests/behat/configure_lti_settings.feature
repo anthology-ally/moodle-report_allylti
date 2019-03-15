@@ -27,7 +27,7 @@ Feature: Configure LTI settings for Ally report launches
 
   Scenario: Administrator can configure the settings for the Admin Report LTI launch
     Given I log in as "admin"
-    And I navigate to "Ally" node in "Site administration > Plugins > Admin tools"
+    And I navigate to "Ally" in site administration
     And I set the field "Launch URL" to "http://locallaunch.dev"
     And I set the field "Key" to "ltikey"
     And I set the field "Secret" to "secretpassword12345"
