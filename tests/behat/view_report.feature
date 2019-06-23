@@ -25,31 +25,51 @@ Feature: Launch to Ally reports
   As an Administrator
   I want to click a link to launch to Ally reports
 
+  Background:
+    Given the following "courses" exist:
+      | fullname | shortname | category | format |
+      | Course 1 | C1        | 0        | topics |
+    And the following "users" exist:
+      | username | firstname | lastname | email                |
+      | student1 | Student   | 1        | student1@example.com |
+      | teacher1 | Teacher   | 1        | teacher1@example.com |
+    And the following "course enrolments" exist:
+      | user     | course | role           |
+      | student1 | C1     | student        |
+      | teacher1 | C1     | editingteacher |
+    And the following config values are set as admin:
+      | adminurl | /report/allylti/tests/fixtures/report.php | tool_ally |
+      | key      | ltikey                                    | tool_ally |
+      | secret   | secretpassword12345                       | tool_ally |
+
   @javascript
-  Scenario: Administrator can click a link to launch report when configured
+  Scenario: Administrator can click a link to launch site report when configured
     Given I log in as "admin"
-    And I am on site homepage
-    And I navigate to "Plugins > Admin tools > Ally" in site administration
-    And I set the field "Launch URL" to local url "/report/allylti/tests/fixtures/report.php"
-    And I set the field "Key" to "ltikey"
-    And I click on "Click to enter text" "link"
-    And I set the field "Secret" to "secretpassword12345"
-    And I press "Save changes"
     And I navigate to "Reports > Accessibility" in site administration
     And I switch to "contentframe" iframe
     Then I should see "This represents a report launch"
 
-  Scenario: Teacher does not see a link for the report
-    Given the following "users" exist:
-      | username | firstname | lastname | email                |
-      | teacher1 | Terry1    | Teacher1 | teacher1@example.com |
-    And the following "courses" exist:
-      | fullname | shortname | category |
-      | Course 1 | C1 | 0 |
-    And the following "course enrolments" exist:
-      | user | course | role |
-      | teacher1 | C1 | editingteacher |
+  Scenario: Teacher does not see a link for the site report
     And I log in as "teacher1"
     And I am on "Course 1" course homepage
     Then "Reports > Accessibility" "link" should not exist in current page administration
 
+  @javascript
+  Scenario Outline: Teacher can click a link to launch course report, student cannot.
+    And the following config values are set as admin:
+      | theme | <theme> |
+    And I log in as "teacher1"
+    And I am on "Course 1" course homepage
+    And "a[href*=\"report/allylti/launch.php?reporttype=course\"]" "css_element" should exist
+    And I navigate to the course accessibility report
+    And I should see "This represents a report launch"
+    And I am on site homepage
+    And I log out
+    And I log in as "student1"
+    And I am on "Course 1" course homepage
+    And "a[href*=\"report/allylti/launch.php?reporttype=course\"]" "css_element" should not exist
+    And I log out
+  Examples:
+    |theme|
+    |boost|
+    |clean|

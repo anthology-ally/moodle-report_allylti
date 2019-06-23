@@ -28,8 +28,16 @@ use report_allylti\local\launch_config;
 require_once(__DIR__ . '/../../config.php');
 require_once($CFG->dirroot . '/mod/lti/locallib.php');
 
-require_login(null, false);
-require_capability('report/allylti:viewadminreport', context_system::instance());
+$reporttype = optional_param('reporttype', null, PARAM_ALPHA);
+if ($reporttype === 'course') {
+    $course = required_param('course', PARAM_INT);
+    require_login($course, false);
+} else {
+    require_login(null, false);
+    require_capability('report/allylti:viewadminreport', context_system::instance());
+    $course = optional_param('course', SITEID, PARAM_INT);
+}
+$PAGE->set_course(get_course($course));
 $report = required_param('report', PARAM_ALPHA);
 
 $config = get_config('tool_ally');
@@ -38,7 +46,7 @@ $launchcontainer = $launchconfig->get_launchcontainer();
 
 $instance = (object) [
     'id' => 0,
-    'course' => SITEID,
+    'course' => $course,
     'name' => 'Ally report',
     'typeid' => null,
     'instructorchoicesendname' => 0,
