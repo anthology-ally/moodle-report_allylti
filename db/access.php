@@ -32,4 +32,12 @@ $capabilities = [
             'manager' => CAP_ALLOW
         ],
     ],
+    'report/allylti:viewcoursereport' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_COURSE,
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW
+        ],
+    ]
 ];
