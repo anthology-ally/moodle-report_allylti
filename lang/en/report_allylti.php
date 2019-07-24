@@ -39,3 +39,4 @@ $string['privacy:metadata:lti:roles']   = 'The roles in the course for the user 
 $string['privacy:metadata:lti:userid'] = 'The ID of the user accessing Ally.';
 $string['privacy:metadata:lti:useridnumber'] = 'The ID number of the user accessing Ally.';
 $string['reportnewwindow'] = 'Accessibility report launched in a new window';
+$string['allylti:viewcoursereport'] = 'view course report';
