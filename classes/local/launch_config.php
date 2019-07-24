@@ -89,7 +89,8 @@ class launch_config {
     public function get_url() {
         $reporttype = optional_param('reporttype', '', PARAM_ALPHANUM);
         switch ($reporttype) {
-            case('course'): return preg_replace('/institution$/', 'course', $this->url);
+            case('course'):
+                return preg_replace('/institution$/', 'course', $this->url);
         }
 
         return $this->url;

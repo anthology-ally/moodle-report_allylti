@@ -44,7 +44,7 @@ class behat_report_allylti extends behat_base {
     private function findnofail(string $selector, string $locator) {
         try {
             $node = $this->find($selector, $locator);
-        } catch(ExpectationException $e) {
+        } catch (ExpectationException $e) {
             return false;
         }
         return $node;
@@ -64,6 +64,17 @@ class behat_report_allylti extends behat_base {
         $node->click();
     }
 
-
-
+    /**
+     * Switches to the newly opened tab/window. Useful when you do not know name of window/tab.
+     *
+     * @Given /^I switch to the new window$/
+     */
+    public function switch_to_the_new_window() {
+        $windownames = $this->getSession()->getWindowNames();
+        if (count($windownames) > 1) {
+            $this->getSession()->switchToWindow(end($windownames));
+        } else {
+            throw new Exception('Only one tab/window available.');
+        }
     }
+}
