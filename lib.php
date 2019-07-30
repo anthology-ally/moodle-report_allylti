@@ -32,7 +32,7 @@ function report_allylti_extend_navigation_course($navigation, $course, $context)
         $item = $PAGE->navigation->add(
             get_string('coursereport', 'report_allylti'),
             $url,
-            navigation_node::TYPE_CUSTOM, null, null, $icon);
+            navigation_node::TYPE_CUSTOM, null, 'key_report_allylti', $icon);
         $item->showinflatnavigation = true;
 
         // Non flat menu themes.
