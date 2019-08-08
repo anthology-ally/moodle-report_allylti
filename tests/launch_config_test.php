@@ -106,4 +106,19 @@ class report_allylti_launch_config_testcase extends basic_testcase {
         $this->assertEquals('key', $launchconfig->get_key());
         $this->assertEquals('secret', $launchconfig->get_secret());
     }
+
+    public function test_config_course_report_url() {
+        $config = (object) [
+            'courseurl' => 'http://localdev.dev/lti/institution',
+            'key' => 'key',
+            'secret' => 'secret',
+        ];
+
+        $_GET['reporttype'] = 'course';
+
+        $cfg = new stdClass();
+        $launchconfig = new launch_config($config, 'course', $cfg);
+        $url = $launchconfig->get_url();
+        $this->assertEquals('http://localdev.dev/lti/instructor', $url);
+    }
 }
