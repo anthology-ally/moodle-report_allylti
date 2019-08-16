@@ -20,7 +20,10 @@ function report_allylti_extend_navigation_course($navigation, $course, $context)
     global $PAGE, $COURSE;
 
     $canview = has_capability('report/allylti:viewcoursereport', context_course::instance($COURSE->id));
-    if ($COURSE->id !== SITEID && $canview) {
+    $config = get_config('tool_ally');
+    $configured = !empty($config) && !empty($config->adminurl) && !empty($config->key) && !empty($config->secret);
+
+    if ($COURSE->id !== SITEID && $canview && $configured) {
         // For themes with flat menu, we deliberately add to the PAGE root navigation and not rely on a param passed
         // into this function.
         $url = new moodle_url('/report/allylti/launch.php', [
