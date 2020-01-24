@@ -72,5 +72,5 @@ Feature: Launch to Ally reports
     And "a[href*=\"report/allylti/launch.php?reporttype=course\"]" "css_element" should not exist
     And I log out
   Examples:
-    |theme|
-    |clean|
+    |theme  |
+    |classic|
