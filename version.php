@@ -28,8 +28,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->version      = 2020061100;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires     = 2019111800;        // Requires this Moodle version.
-$plugin->release      = '3.8.3';
+$plugin->requires     = 2020061500;        // Requires this Moodle version.
+$plugin->release      = '3.9.3';
 $plugin->component    = 'report_allylti';  // Full name of the plugin (used for diagnostics).
 $plugin->dependencies = [
     'tool_ally'      => 2020061100,
