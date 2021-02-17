@@ -34,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
  */
 class report_allylti_launch_config_testcase extends basic_testcase {
 
-    public function setUp() {
+    public function setUp(): void {
         global $CFG;
         require_once($CFG->dirroot . '/mod/lti/locallib.php');
     }
