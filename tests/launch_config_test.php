@@ -19,7 +19,7 @@
  *
  * @package    report_allylti
  * @author     Sam Chaffee
- * @copyright  Copyright (c) 2016 Blackboard Inc. (http://www.blackboard.com)
+ * @copyright  Copyright (c) 2016 Open LMS (https://www.openlms.net)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 use report_allylti\local\launch_config;
@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
  * Launch config test case.
  *
  * @package    report_allylti
- * @copyright  Copyright (c) 2016 Blackboard Inc. (http://www.blackboard.com)
+ * @copyright  Copyright (c) 2016 Open LMS (https://www.openlms.net)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class report_allylti_launch_config_testcase extends basic_testcase {
