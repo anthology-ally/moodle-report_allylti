@@ -15,23 +15,19 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is a one-line short description of the file.
- *
- * You can have a rather longer description of the file as well,
- * if you like, and it can span multiple lines.
+ * Hooks for report_allylti.
  *
  * @package    report_allylti
- * @author     Sam Chaffee
- * @copyright  Copyright (c) 2016 Open LMS (https://www.openlms.net) / 2023 Anthology Inc. and its affiliates
+ * @copyright  2024 onwards University College London {@link https://www.ucl.ac.uk/}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @author     Leon Stringer <leon.stringer@ucl.ac.uk>
  */
+
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version      = 2024060304;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires     = 2024042200;        // Requires Moodle 4.4.
-$plugin->release      = '4.3.1';
-$plugin->component    = 'report_allylti';  // Full name of the plugin (used for diagnostics).
-$plugin->dependencies = [
-    'tool_ally'      => 2024060300,
-    'filter_ally'    => 2024060300,
+$callbacks = [
+    [
+        'hook' => \core\hook\output\before_standard_head_html_generation::class,
+        'callback' => \report_allylti\local\hook_callbacks::class . '::before_standard_head_html_generation',
+    ],
 ];
