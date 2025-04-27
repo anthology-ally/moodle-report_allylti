@@ -58,10 +58,6 @@ class behat_report_allylti extends behat_base {
             $node = $this->find('xpath', '//div[@id="settingsnav"]//ul//li//p//a[text()="Reports"]');
             $node->click();
         }
-
-        $linkselector = '//a[contains(@href, "report/allylti/launch.php?reporttype=course")]';
-        $node = $this->find('xpath', $linkselector);
-        $node->click();
     }
 
     /**
