@@ -19,7 +19,7 @@
 # @copyright  Copyright (c) 2019 Open LMS (https://www.openlms.net) / 2023 Anthology Inc. and its affiliates
 # @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 
-@report @report_allylti
+@report @report_allylti @suite_ally
 Feature: Accessibility report should not be available to users that don't have Ally configured
   and should be available to users that do have it configured.
 
