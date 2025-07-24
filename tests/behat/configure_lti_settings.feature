@@ -19,7 +19,7 @@
 # @copyright  Copyright (c) 2016 Open LMS (https://www.openlms.net) / 2023 Anthology Inc. and its affiliates
 # @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
 
-@report @report_allylti
+@report @report_allylti @suite_ally
 Feature: Configure LTI settings for Ally report launches
   In order to be able to launch the Ally reports
   As an Administrator
