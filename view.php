@@ -26,11 +26,11 @@
 use report_allylti\local\launch_config;
 
 require_once(__DIR__ . '/../../config.php');
-require_once($CFG->libdir.'/adminlib.php');
+require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->dirroot . '/mod/lti/locallib.php');
 
 $undertest = defined('BEHAT_SITE_RUNNING') || PHPUNIT_TEST;
-if (!$undertest and is_callable('mr_off') and mr_off('report_allylti', '_MR_MISC')) {
+if (!$undertest && is_callable('mr_off') && mr_off('report_allylti', '_MR_MISC')) {
     new moodle_exception('notenabled', 'report_allylti');
 }
 
@@ -64,13 +64,13 @@ echo $OUTPUT->header();
 // Code from mod/lti/view.php with minor modifications.
 if ($launchcontainer == LTI_LAUNCH_CONTAINER_WINDOW) {
     echo "<script language=\"javascript\">//<![CDATA[\n";
-    echo "window.open('launch.php?report=".$report."','lti');";
+    echo "window.open('launch.php?report=" . $report . "','lti');";
     echo "//]]\n";
     echo "</script>\n";
-    echo "<p>".get_string('reportnewwindow', 'report_allylti')."</p>\n";
+    echo "<p>" . get_string('reportnewwindow', 'report_allylti') . "</p>\n";
 } else {
     // Request the launch content with an iframe tag.
-    echo '<iframe id="contentframe" height="600px" width="100%" src="launch.php?report='.$report.'"></iframe>';
+    echo '<iframe id="contentframe" height="600px" width="100%" src="launch.php?report=' . $report . '"></iframe>';
 
     // Output script to make the iframe tag be as large as possible.
     $resize = '

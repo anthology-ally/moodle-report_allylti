@@ -24,6 +24,8 @@
  */
 namespace report_allylti\local;
 
+use moodle_url;
+
 /**
  * Ally report LTI launch configuration.
  *
@@ -32,7 +34,6 @@ namespace report_allylti\local;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class launch_config {
-
     /**
      * @var \moodle_url
      */
@@ -82,20 +83,23 @@ class launch_config {
     }
 
     /**
-     * @return string
+     * Get url as string or moodle_url.
+     *
+     * @return string | moodle_url
      */
-    public function get_url() {
+    public function get_url(): string | moodle_url {
         $reporttype = optional_param('reporttype', '', PARAM_ALPHANUM);
         switch ($reporttype) {
-            case('course'):
+            case ('course'):
                 return preg_replace('/institution$/', 'instructor', $this->url);
         }
 
         return $this->url;
-
     }
 
     /**
+     * Get key.
+     *
      * @return string
      */
     public function get_key() {
@@ -103,6 +107,8 @@ class launch_config {
     }
 
     /**
+     * Get secret.
+     *
      * @return string
      */
     public function get_secret() {
@@ -110,10 +116,11 @@ class launch_config {
     }
 
     /**
+     * Get launch container.
+     *
      * @return int
      */
     public function get_launchcontainer() {
         return $this->launchcontainer;
     }
-
 }

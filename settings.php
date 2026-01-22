@@ -28,13 +28,17 @@ defined('MOODLE_INTERNAL') || die();
 $settings = null;
 
 $undertest = defined('BEHAT_SITE_RUNNING') || PHPUNIT_TEST;
-if (!$undertest and is_callable('mr_off') and mr_off('report_allylti', '_MR_MISC')) {
+if (!$undertest && is_callable('mr_off') && mr_off('report_allylti', '_MR_MISC')) {
     return;
 }
 
 $config     = get_config('tool_ally');
 $configured = !empty($config) && !empty($config->adminurl) && !empty($config->key) && !empty($config->secret);
 if ($configured) {
-    $ADMIN->add('reports', new admin_externalpage('allyadminreport', get_string('adminreport', 'report_allylti'),
-        "$CFG->wwwroot/report/allylti/view.php?report=admin", 'report/allylti:viewadminreport'));
+    $ADMIN->add('reports', new admin_externalpage(
+        'allyadminreport',
+        get_string('adminreport', 'report_allylti'),
+        "$CFG->wwwroot/report/allylti/view.php?report=admin",
+        'report/allylti:viewadminreport'
+    ));
 }

@@ -14,6 +14,14 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Ally LTI report navigation hooks.
+ *
+ * @package    report_allylti
+ * @author     Guy Thomas
+ * @copyright  Copyright (c) 2016 Open LMS (https://www.openlms.net) / 2023 Anthology Inc. and its affiliates
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 function report_allylti_extend_navigation_course($navigation, $course, $context) {
     global $PAGE, $COURSE;
 
@@ -27,13 +35,16 @@ function report_allylti_extend_navigation_course($navigation, $course, $context)
         $url = new moodle_url('/report/allylti/launch.php', [
                 'reporttype' => 'course',
                 'report' => 'admin',
-                'course' => $COURSE->id, ]
-        );
+                'course' => $COURSE->id, ]);
         $icon = new pix_icon('i/ally_logo', '', 'report_allylti');
         $item = $PAGE->navigation->add(
             get_string('coursereport', 'report_allylti'),
             $url,
-            navigation_node::TYPE_CUSTOM, null, 'key_report_allylti', $icon);
+            navigation_node::TYPE_CUSTOM,
+            null,
+            'key_report_allylti',
+            $icon
+        );
         $item->showinflatnavigation = true;
 
         // Non flat menu themes.

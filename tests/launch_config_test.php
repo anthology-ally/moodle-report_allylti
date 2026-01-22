@@ -21,6 +21,7 @@
  * @author     Sam Chaffee
  * @copyright  Copyright (c) 2016 Open LMS (https://www.openlms.net) / 2023 Anthology Inc. and its affiliates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers     \report_allylti\local\launch_config
  */
 namespace report_allylti;
 use report_allylti\local\launch_config;
@@ -30,15 +31,16 @@ use report_allylti\local\launch_config;
  *
  * @package    report_allylti
  * @copyright  Copyright (c) 2016 Open LMS (https://www.openlms.net) / 2023 Anthology Inc. and its affiliates
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  * @group      report_allylti
  * @group      ally
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @covers     \report_allylti\local\launch_config
  */
-class launch_config_test extends \basic_testcase {
-
+final class launch_config_test extends \basic_testcase {
     public function setUp(): void {
         global $CFG;
         require_once($CFG->dirroot . '/mod/lti/locallib.php');
+        parent::setUp();
     }
 
     public function test_config_empty_exception(): void {
