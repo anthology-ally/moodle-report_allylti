@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $string['adminreport'] = 'Accessibility';
 $string['allylti:viewadminreport'] = 'View the Accessibility report';
-$string['allylti:viewcoursereport'] = 'view course report';
+$string['allylti:viewcoursereport'] = 'View course report';
 $string['coursereport'] = 'Accessibility report';
 $string['notconfigured'] = 'The Accessibility report is not configured';
 $string['notenabled'] = 'The Accessibility report is not enabled';
