@@ -10,8 +10,6 @@ on:
   push:
     tags:
       - AY*
-    branches:
-      - 'MOODLE_*_STABLE'
 
   workflow_dispatch:
     inputs:
@@ -34,6 +32,24 @@ jobs:
       FUNCTION: local_plugins_add_version
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Validate branch
+        if: github.event_name == 'push'
+        run: |
+          BRANCH="${{ github.event.base_ref }}"
+          if [[ -z "${BRANCH}" ]]; then
+            BRANCH=$(git branch -r --contains ${{ github.sha }} | grep -oP 'origin/MOODLE_[0-9]+_STABLE' | head -1)
+          fi
+          if [[ ! "${BRANCH}" =~ MOODLE_[0-9]+_STABLE ]]; then
+            echo "Tag must be pushed from a MOODLE_[0-9]+_STABLE branch"
+            exit 1
+          fi
+          echo "Tag validated on branch: ${BRANCH}"
+
       - name: Call the service function
         id: add-version
         env:
