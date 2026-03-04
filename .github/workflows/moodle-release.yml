@@ -69,7 +69,7 @@ jobs:
             exit 1
           fi
           ZIPURL="https://api.github.com/repos/${{ github.repository }}/zipball/${TAGNAME}"
-          for i in {1..3}; do
+          for ATTEMPT in {1..3}; do
             HTTP_CODE=$(${CURL} -w "%{http_code}" -o response.json ${ENDPOINT} --data-urlencode "wstoken=${TOKEN}" \
                                            --data-urlencode "wsfunction=${FUNCTION}" \
                                            --data-urlencode "moodlewsrestformat=json" \
@@ -82,9 +82,9 @@ jobs:
                                            --data-urlencode "altdownloadurl=${ZIPURL}")
             if [[ ${HTTP_CODE} -ge 200 && ${HTTP_CODE} -lt 300 ]]; then
               break
-            elif [[ $i -lt 3 ]]; then
-              echo "Attempt $i failed with HTTP ${HTTP_CODE}, retrying..."
-              sleep $((i * 5))
+            elif [[ $ATTEMPT -lt 3 ]]; then
+              echo "Attempt $ATTEMPT failed with HTTP ${HTTP_CODE}, retrying..."
+              sleep $((ATTEMPT * 5))
             else
               echo "Failed after 3 attempts with HTTP ${HTTP_CODE}"
               cat response.json
