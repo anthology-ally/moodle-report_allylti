@@ -23,7 +23,16 @@
 
 namespace report_allylti\local;
 
+/**
+ * Ally report hooks.
+ * @author    Guy Thomas
+ * @copyright Copyright (c) 2024 Anthology Inc. and its affiliates
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class hook_callbacks {
+    /**
+     * Before standard head html generation hook.
+     */
     public static function before_standard_head_html_generation() {
         global $PAGE;
         $PAGE->requires->js_call_amd('report_allylti/main', 'init');

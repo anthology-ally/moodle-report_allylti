@@ -40,7 +40,9 @@ use tool_ally\models\component_content;
  * @package   filter_ally
  */
 class behat_report_allylti extends behat_base {
-
+    /**
+     * Finds an element but does not fail if not found.
+     */
     private function findnofail(string $selector, string $locator) {
         try {
             $node = $this->find($selector, $locator);
@@ -51,7 +53,9 @@ class behat_report_allylti extends behat_base {
     }
 
     /**
-     * @Given I navigate to the course accessibility report
+     * User navigates to the course accessibility report.
+     *
+     * @When I navigate to the course accessibility report
      */
     public function navigate_ax_report() {
         if ($this->findnofail('xpath', '//div[@id="settingsnav"]')) {
