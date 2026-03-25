@@ -33,6 +33,9 @@ $plugin->release      = '5.0.1';
 $plugin->version      = 2026012825;
 $plugin->requires     = 2025041400;
 $plugin->maturity     = MATURITY_STABLE;
+$plugin->supported    = [
+    500
+];
 $plugin->dependencies = [
     'tool_ally'      => 2026012825,
     'filter_ally'    => 2026012825,
