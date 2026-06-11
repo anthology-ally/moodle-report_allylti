@@ -48,7 +48,7 @@ $launchcontainer = $launchconfig->get_launchcontainer();
 // Code from mod/lti/view.php with minor modifications.
 if ($launchcontainer == LTI_LAUNCH_CONTAINER_EMBED_NO_BLOCKS) {
     $title = get_string('pluginname', 'report_allylti');
-    $url = new moodle_url('/report/ally/view.php', ['report' => $report]);
+    $url = new moodle_url('/report/allylti/view.php', ['report' => $report]);
     $PAGE->set_url($url);
     $PAGE->set_title($title);
     $PAGE->set_pagelayout('frametop'); // Most frametops don't include footer, and pre-post blocks.
@@ -74,29 +74,17 @@ if ($launchcontainer == LTI_LAUNCH_CONTAINER_WINDOW) {
 
     // Output script to make the iframe tag be as large as possible.
     $resize = '
-        <script type="text/javascript">
-        //<![CDATA[
-            YUI().use("node", "event", function(Y) {
-                //Take scrollbars off the outer document to prevent double scroll bar effect
-                var doc = Y.one("body");
-                doc.setStyle("overflow", "hidden");
-
-                var frame = Y.one("#contentframe");
-                var padding = 15; //The bottom of the iframe wasn\'t visible on some themes. Probably because of border widths, etc.
-                var lastHeight;
-                var resize = function(e) {
-                    var viewportHeight = doc.get("winHeight");
-                    if(lastHeight !== Math.min(doc.get("docHeight"), viewportHeight)){
-                        frame.setStyle("height", viewportHeight - frame.getY() - padding + "px");
-                        lastHeight = Math.min(doc.get("docHeight"), doc.get("winHeight"));
-                    }
-                };
-
-                resize();
-
-                Y.on("windowresize", resize);
-            });
-        //]]
+        <script>
+        (function() {
+            var frame = document.getElementById("contentframe");
+            var padding = 15;
+            function resize() {
+                document.body.style.overflow = "hidden";
+                frame.style.height = (window.innerHeight - frame.getBoundingClientRect().top - padding) + "px";
+            }
+            resize();
+            window.addEventListener("resize", resize);
+        })();
         </script>
 ';
 

@@ -33,7 +33,9 @@ class hook_callbacks {
     /**
      * Before standard head html generation hook.
      */
-    public static function before_standard_head_html_generation() {
+    public static function before_standard_head_html_generation(
+        \core\hook\output\before_standard_head_html_generation $hook
+    ): void {
         global $PAGE;
         $PAGE->requires->js_call_amd('report_allylti/main', 'init');
     }

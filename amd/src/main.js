@@ -20,11 +20,17 @@
  * @copyright  Copyright (c) 2019 Open LMS (https://www.openlms.net) / 2023 Anthology Inc. and its affiliates
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-define(['jquery'],
-    function($) {
+define([],
+    function() {
         return {
             init: function() {
-                $('body:not(.moodlebehat-test) a[href*="report/allylti/launch.php?reporttype=course"]').attr('target', '_blank');
+                if (document.body.classList.contains('moodlebehat-test')) {
+                    return;
+                }
+                document.querySelectorAll('a[href*="report/allylti/launch.php?reporttype=course"]')
+                    .forEach(function(link) {
+                        link.setAttribute('target', '_blank');
+                    });
             }
         };
     }
