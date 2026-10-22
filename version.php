@@ -37,3 +37,7 @@ $plugin->dependencies = [
     'tool_ally'      => 2026012850,
     'filter_ally'    => 2026012850,
 ];
+$plugin->supported    = [
+    502,
+    502
+];
