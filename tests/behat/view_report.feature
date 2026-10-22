@@ -55,15 +55,12 @@ Feature: Launch to Ally reports
     Then "Reports > Accessibility" "link" should not exist in current page administration
 
   @javascript
-  Scenario Outline: Teacher can click a link to launch course report, student cannot.
-    And the following config values are set as admin:
-      | theme | <theme> |
-    And I log in as "teacher1"
+  Scenario: Teacher can click a link to launch course report, student cannot.
+    Given I log in as "teacher1"
     And I am on "Course 1" course homepage
-    And "a[href*=\"report/allylti/launch.php?reporttype=course\"]" "css_element" should exist
-    And I navigate to the course accessibility report
-    And I click on "Accessibility report" "link" in the "#settingsnav" "css_element"
-    Given I switch to the new window
+    And I navigate to "Reports" in current page administration
+    And I click on "Accessibility report" "link" in the "region-main" "region"
+    And I switch to the new window
     And I should see "This represents a report launch"
     And I am on site homepage
     And I log out
@@ -71,6 +68,3 @@ Feature: Launch to Ally reports
     And I am on "Course 1" course homepage
     And "a[href*=\"report/allylti/launch.php?reporttype=course\"]" "css_element" should not exist
     And I log out
-  Examples:
-    |theme  |
-    |classic|
