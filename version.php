@@ -30,10 +30,14 @@ defined('MOODLE_INTERNAL') || die();
 /** @var stdClass $plugin */
 $plugin->component    = 'report_allylti';
 $plugin->release      = '5.3.0';
-$plugin->version      = 2026102900;
+$plugin->version      = 2026110300; // 20261103 = frozen line date YYYYMMDD - do not modify!
 $plugin->requires     = 2025041400;
 $plugin->maturity     = MATURITY_STABLE;
 $plugin->dependencies = [
     'tool_ally'      => 2026012850,
     'filter_ally'    => 2026012850,
+];
+$plugin->supported    = [
+    503,
+    503
 ];
