@@ -20,13 +20,13 @@ Moodle offers any higher `$plugin->version` as an update and refuses to install 
 5. **`$plugin->dependencies`** never exceed what the sibling plugin has released on the same line.
 6. **`$plugin->requires`** is the oldest Moodle a build installs on, and the only Moodle check Moodle enforces: `supported` only shows a warning. It stays as it is in a version bump. Change it only in its own pull request that says why.
 
-Before you push a version.php change, run `.github/scripts/check-version-order.sh <line>`. The `Version order` workflow runs the same check on every pull request, and a `FAIL` blocks the merge.
+Before you push a version.php change, run `.github/scripts/check-version-order.sh <line>`. On a pull request into `MOODLE_*_STABLE` that changes version.php, the `Version order` workflow runs the same check and a `FAIL` fails it. On any other pull request it only reports.
 
 ## Branches
 
 - A fix that isn't specific to one Moodle version goes to `master` first. Then `git cherry-pick -x` it onto each supported `MOODLE_*_STABLE` branch: one pull request per branch, each with its own version bump. A fix for one Moodle version only goes straight to that branch.
 - Never copy version.php between branches. The date, `supported`, `requires` and dependency minimums differ per line, so a cherry-pick that touches version.php needs fixing by hand.
-- filter_ally's CI checks out the branch with the same name in tool_ally and report_allylti, or else that line's `MOODLE_<line>_STABLE`. For a change across repos, push the branches to tool_ally and report_allylti first.
+- filter_ally's CI checks out tool_ally and report_allylti at the branch with the same name, else `MOODLE_<line>_STABLE`, else `MOODLE_<line>_WIP`, and fails if none exists. For a change across repos, push the branches to tool_ally and report_allylti first.
 
 ## Releasing
 
@@ -60,6 +60,7 @@ Run from the Moodle root:
 vendor/bin/phpunit --group report_allylti
 php public/admin/tool/behat/cli/run.php --tags=@report_allylti
 cd public/report/allylti && npx grunt amd     # amd/build is committed
+php admin/cli/purge_caches.php                 # after changing lang/, db/hooks.php or db/access.php
 ```
 
 This repo has no test CI: filter_ally's CI runs these tests. Tag new tests `@group report_allylti` and `@group ally`, and new features `@report @report_allylti @suite_ally`, or they drop out of the CI runs.
@@ -69,9 +70,10 @@ This repo has no test CI: filter_ally's CI runs these tests. Tag new tests `@gro
 - **Configuration lives in `tool_ally`.** The plugin counts as unconfigured unless `adminurl`, `key` and `secret` are all set. That check is repeated in `settings.php`, `lib.php` and `classes/local/launch_config.php`; keep the three in step.
 - **Launch.** `view.php` (iframe, new window or redirect) → `launch.php`, which builds a throwaway LTI instance (`id => 0`, `typeid => null`) and calls core's `lti_launch_tool()`. Without a `typeid`, Moodle sends an LTI 1.0/1.1 launch signed with the key and secret.
 - **Course report.** It reuses the admin URL, and `launch_config::get_url()` rewrites a trailing `institution` to `instructor`. Changing the shape of the admin URL breaks the course report without any error.
-- **Capabilities.** `report/allylti:viewadminreport` at system level, `report/allylti:viewcoursereport` at course level. For the course report, `launch.php` checks only `require_login($course)`.
-- `lib.php` adds the course navigation node twice on purpose, once for flat navigation and once for classic themes.
+- **Capabilities.** `report/allylti:viewadminreport` at system level, `report/allylti:viewcoursereport` at course level. `launch.php` checks `viewadminreport` for the admin report, but only `require_login($course)` for the course report. `viewcoursereport` only hides the navigation link (`lib.php`), so any user who can enter the course can open the course launch URL.
+- `lib.php` adds the course navigation node twice: to `$PAGE->navigation` for flat navigation, which core deprecated and whose classes Moodle 5.3 removed (MDL-87425), and to the `$navigation` passed in, which puts it under the course's Reports. On 5.3 only the second one shows.
 - `$CFG->report_allylti_launch_container` in `config.php` picks the launch container (default: embed). `view.php` copies code from `mod/lti/view.php`, including a YUI resize block.
 - `view.php` and `settings.php` call `mr_off()`, an Open LMS feature flag. Keep the `$undertest` guard around it.
 - `db/hooks.php` loads `amd/src/main.js` on every page to open course report links in a new tab, except under Behat.
+- **Privacy.** The plugin stores nothing. The privacy provider only declares the data sent to Ally over LTI (`add_external_location_link('lti', …)`).
 - In Behat, `tests/fixtures/report.php` stands in for Ally.
