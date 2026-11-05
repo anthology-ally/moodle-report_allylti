@@ -31,7 +31,7 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->component    = 'report_allylti';
 $plugin->release      = '5.2.1';
 $plugin->version      = 2026110200; // 20261102 = frozen line date YYYYMMDD - do not modify!
-$plugin->requires     = 2025041400;
+$plugin->requires     = 2026042000; // Moodle 5.2
 $plugin->maturity     = MATURITY_STABLE;
 $plugin->dependencies = [
     'tool_ally'      => 2026012850,
