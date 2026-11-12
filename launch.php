@@ -32,6 +32,7 @@ $reporttype = optional_param('reporttype', null, PARAM_ALPHA);
 if ($reporttype === 'course') {
     $course = required_param('course', PARAM_INT);
     require_login($course, false);
+    require_capability('report/allylti:viewcoursereport', context_course::instance($course));
 } else {
     require_login(null, false);
     require_capability('report/allylti:viewadminreport', context_system::instance());
