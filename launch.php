@@ -44,6 +44,16 @@ $config = get_config('tool_ally');
 $launchconfig = new launch_config($config, $report, $CFG);
 $launchcontainer = $launchconfig->get_launchcontainer();
 
+// A tool_ally older than its LTI 1.3 support has no lti13 class; launch over LTI 1.1 then.
+$lti13typeid = class_exists(\tool_ally\lti\lti13::class)
+    ? \tool_ally\lti\lti13::find_type($config, $reporttype === 'course' ? 'course' : 'institution')
+    : null;
+if ($lti13typeid) {
+    echo \tool_ally\lti\lti13::login_form($lti13typeid, $course);
+    die;
+}
+// No registered LTI 1.3 tool: LTI 1.1 launch below, unchanged.
+
 $instance = (object) [
     'id' => 0,
     'course' => $course,
