@@ -18,6 +18,14 @@ needs doing. Example, indented so the workflow ignores it (write yours without t
     ### Upgrade notes
     - No database changes and no new settings.
 
+## 5.3.1 (2026110301)
+
+### Added
+- The institution and course accessibility reports launch over LTI 1.3 when their Ally tool is registered in Moodle and active; otherwise they launch over LTI 1.1, as before.
+
+### Upgrade notes
+- Requires tool_ally 5.3.1. No database changes and no new settings.
+
 ## 5.3.0 (2026110300)
 
 ### Added
